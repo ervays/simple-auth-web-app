@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const userRoles = document.getElementById('user-roles');
     const logoutButton = document.getElementById('logout-btn');
     
-    // API endpoint - changed from localhost to auth-api for container networking
-    const API_URL = 'http://auth-api:5000';
+    // API endpoint - using the proxy path instead of direct hostname
+    const API_URL = '/api';  // This will be proxied by our server to the auth-api container
     
     // Check if user is already logged in
     checkSession();
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         try {
             // Call login API
-            const response = await fetch(`${API_URL}/api/login`, {
+            const response = await fetch(`${API_URL}/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get user details with token
     async function getUserDetails(token) {
         try {
-            const response = await fetch(`${API_URL}/api/user`, {
+            const response = await fetch(`${API_URL}/user`, {
                 method: 'GET',
                 headers: {
                     'Authorization': token
