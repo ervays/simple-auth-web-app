@@ -94,6 +94,80 @@
                 </form>
             </div>
             
+            <!-- User panel - only visible for regular users -->
+            <div id="user-panel" class="user-panel hidden">
+                <div class="tabs">
+                    <div class="tab-header">
+                        <div class="tab-item active" data-tab="tasks">Tasks</div>
+                        <div class="tab-item" data-tab="requests">Requests</div>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <!-- Tasks Tab -->
+                        <div id="tasks-tab" class="tab-pane active">
+                            <h2>Manage Tasks</h2>
+                            
+                            <div id="task-form-message" class="message"></div>
+                            
+                            <form id="add-task-form" class="task-form">
+                                <div class="form-group">
+                                    <label for="task-description">Task Description</label>
+                                    <textarea id="task-description" name="description" required></textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="task-owners">Additional Task Owners</label>
+                                    <select id="task-owners" name="owners" multiple>
+                                        <!-- Will be populated dynamically -->
+                                    </select>
+                                    <small>Hold Ctrl/Cmd to select multiple users</small>
+                                </div>
+                                
+                                <button type="submit" class="submit-btn">
+                                    <span class="btn-text">Add Task</span>
+                                    <span class="btn-loader"><i class="fas fa-spinner fa-spin"></i></span>
+                                </button>
+                            </form>
+                            
+                            <div class="list-section">
+                                <h3>Your Tasks</h3>
+                                <div id="tasks-list" class="items-list">
+                                    <!-- Will be populated dynamically -->
+                                    <div class="empty-message">No tasks found</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Requests Tab -->
+                        <div id="requests-tab" class="tab-pane">
+                            <h2>Manage Requests</h2>
+                            
+                            <div id="request-form-message" class="message"></div>
+                            
+                            <form id="add-request-form" class="request-form">
+                                <div class="form-group">
+                                    <label for="request-description">Request Description</label>
+                                    <textarea id="request-description" name="description" required></textarea>
+                                </div>
+                                
+                                <button type="submit" class="submit-btn">
+                                    <span class="btn-text">Submit Request</span>
+                                    <span class="btn-loader"><i class="fas fa-spinner fa-spin"></i></span>
+                                </button>
+                            </form>
+                            
+                            <div class="list-section">
+                                <h3>Your Requests</h3>
+                                <div id="requests-list" class="items-list">
+                                    <!-- Will be populated dynamically -->
+                                    <div class="empty-message">No requests found</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <button id="logout-btn" class="logout-btn">Logout</button>
         </div>
     </div>
