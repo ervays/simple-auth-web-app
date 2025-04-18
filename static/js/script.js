@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const userRoles = document.getElementById('user-roles');
     const logoutButton = document.getElementById('logout-btn');
     
-    // API endpoint - can be overridden with environment variable
-    const API_URL = window.API_URL || 'http://localhost:5000';
+    // API endpoint - hardcoded to your remote server
+    const API_URL = 'http://13.51.234.173:5000';
     
     // Check if user is already logged in
     checkSession();
