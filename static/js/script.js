@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const userName = document.getElementById('user-name');
     const userRoles = document.getElementById('user-roles');
     const logoutButton = document.getElementById('logout-btn');
+    const adminPanel = document.getElementById('admin-panel');
+    const addUserForm = document.getElementById('add-user-form');
+    const userFormMessage = document.getElementById('user-form-message');
     
     // API endpoint - using the proxy path instead of direct hostname
     const API_URL = '/api';  // This will be proxied by our server to the auth-api container
@@ -23,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         togglePasswordButton.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
     });
     
-    // Handle form submission
+    // Handle login form submission
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
@@ -32,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById('password').value;
         
         // Show loading state
-        setLoading(true);
+        setLoading(loginButton, true);
         
         try {
             // Call login API
@@ -62,9 +65,69 @@ document.addEventListener('DOMContentLoaded', () => {
             showError(error.message || 'An error occurred during login. Please try again.');
         } finally {
             // Hide loading state
-            setLoading(false);
+            setLoading(loginButton, false);
         }
     });
+
+    // Handle add user form submission (for admin users)
+    if (addUserForm) {
+        addUserForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Get the submit button
+            const submitButton = addUserForm.querySelector('.submit-btn');
+            
+            // Show loading state
+            setLoading(submitButton, true);
+            
+            // Get form data
+            const formData = {
+                username: document.getElementById('new-username').value,
+                password: document.getElementById('new-password').value,
+                email: document.getElementById('new-email').value,
+                first_name: document.getElementById('new-first-name').value,
+                last_name: document.getElementById('new-last-name').value,
+                is_admin: document.getElementById('is-admin').checked
+            };
+            
+            try {
+                // Get auth token
+                const token = localStorage.getItem('authToken');
+                if (!token) {
+                    throw new Error('You must be logged in to add users');
+                }
+                
+                // Call API to create user
+                const response = await fetch(`${API_URL}/users`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to create user');
+                }
+                
+                // Show success message
+                showUserFormMessage('User created successfully!', 'success');
+                
+                // Reset form
+                addUserForm.reset();
+                
+            } catch (error) {
+                // Show error message
+                showUserFormMessage(error.message || 'An error occurred while creating the user', 'error');
+            } finally {
+                // Hide loading state
+                setLoading(submitButton, false);
+            }
+        });
+    }
     
     // Handle logout button click
     logoutButton.addEventListener('click', () => {
@@ -112,13 +175,18 @@ document.addEventListener('DOMContentLoaded', () => {
             welcomeScreen.classList.remove('hidden');
             document.querySelector('.container').style.display = 'none';
             
+            // Check if user is admin and show admin panel if they are
+            if (user.roles.includes('admin') && adminPanel) {
+                adminPanel.classList.remove('hidden');
+            }
+            
             return user;
         } catch (error) {
             throw error;
         }
     }
     
-    // Show error message
+    // Show error message for login form
     function showError(message) {
         errorMessage.textContent = message;
         errorMessage.classList.add('active');
@@ -129,14 +197,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 5000);
     }
     
-    // Set loading state
-    function setLoading(isLoading) {
+    // Show message for user form (add user)
+    function showUserFormMessage(message, type) {
+        userFormMessage.textContent = message;
+        userFormMessage.classList.remove('error', 'success');
+        userFormMessage.classList.add(type);
+        
+        // Hide after 5 seconds
+        setTimeout(() => {
+            userFormMessage.classList.remove(type);
+            userFormMessage.textContent = '';
+        }, 5000);
+    }
+    
+    // Set loading state for any button
+    function setLoading(button, isLoading) {
         if (isLoading) {
-            loginButton.classList.add('loading');
-            loginButton.disabled = true;
+            button.classList.add('loading');
+            button.disabled = true;
         } else {
-            loginButton.classList.remove('loading');
-            loginButton.disabled = false;
+            button.classList.remove('loading');
+            button.disabled = false;
         }
     }
 });
