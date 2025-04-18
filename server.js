@@ -3,7 +3,7 @@ const path = require('path');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
 const PORT = process.env.PORT || 8080;
-const API_URL = process.env.API_URL || 'http://auth-api:5000';
+const API_URL = process.env.API_URL || 'http://auth-api:5000'; // Make sure this is using auth-api, not localhost
 
 // Serve static files
 app.use('/static', express.static(path.join(__dirname, 'static')));
