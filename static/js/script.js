@@ -312,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.container').style.display = 'none';
             
             // Check roles and show appropriate panel
-            if (user.roles.includes('admin') && adminPanel) {
+            if (user.roles.includes('admin') && !user.roles.includes('user') && adminPanel) {
                 adminPanel.classList.remove('hidden');
             } else if (userPanel) {
                 userPanel.classList.remove('hidden');
