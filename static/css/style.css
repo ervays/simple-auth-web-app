@@ -8,11 +8,12 @@
 
 body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #333;
+    padding: 20px;
 }
 
 /* Login Container */
@@ -75,7 +76,8 @@ body {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"] {
     width: 100%;
     padding: 15px 15px 15px 45px;
     border: 1px solid #ddd;
@@ -84,8 +86,15 @@ input[type="password"] {
     transition: all 0.3s ease;
 }
 
+.user-form input[type="text"],
+.user-form input[type="password"],
+.user-form input[type="email"] {
+    padding: 15px;
+}
+
 input[type="text"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+input[type="email"]:focus {
     border-color: #667eea;
     outline: none;
     box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
@@ -107,7 +116,7 @@ input[type="password"]:focus {
 }
 
 /* Buttons */
-.login-btn {
+.login-btn, .submit-btn {
     width: 100%;
     padding: 15px;
     background: linear-gradient(to right, #667eea, #764ba2);
@@ -122,7 +131,7 @@ input[type="password"]:focus {
     overflow: hidden;
 }
 
-.login-btn:hover {
+.login-btn:hover, .submit-btn:hover {
     background: linear-gradient(to right, #764ba2, #667eea);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -141,11 +150,13 @@ input[type="password"]:focus {
 }
 
 /* Loading state */
-.login-btn.loading .btn-text {
+.login-btn.loading .btn-text,
+.submit-btn.loading .btn-text {
     opacity: 0;
 }
 
-.login-btn.loading .btn-loader {
+.login-btn.loading .btn-loader,
+.submit-btn.loading .btn-loader {
     display: inline-block;
 }
 
@@ -164,6 +175,27 @@ input[type="password"]:focus {
     display: block;
 }
 
+/* Message */
+.message {
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    display: none;
+}
+
+.message.error {
+    background-color: #ffebee;
+    color: #d32f2f;
+    display: block;
+}
+
+.message.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    display: block;
+}
+
 /* Welcome screen */
 .welcome-container {
     position: fixed;
@@ -176,7 +208,8 @@ input[type="password"]:focus {
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    transition: all 0.5s ease;
+    padding: 20px;
+    overflow-y: auto;
 }
 
 .welcome-content {
@@ -185,8 +218,8 @@ input[type="password"]:focus {
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    max-width: 500px;
-    width: 90%;
+    max-width: 600px;
+    width: 100%;
 }
 
 .welcome-content h1 {
@@ -201,8 +234,43 @@ input[type="password"]:focus {
     font-size: 16px;
 }
 
+/* Admin panel */
+.admin-panel {
+    margin-top: 30px;
+    border-top: 1px solid #eee;
+    padding-top: 30px;
+    text-align: left;
+}
+
+.admin-panel h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group.checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.form-group.checkbox input {
+    margin-right: 8px;
+}
+
 .logout-btn {
-    margin-top: 20px;
+    margin-top: 30px;
     padding: 12px 25px;
     background: linear-gradient(to right, #667eea, #764ba2);
     border: none;
