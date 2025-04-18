@@ -1,0 +1,223 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+}
+
+/* Login Container */
+.container {
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+}
+
+.login-container {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    transition: all 0.3s ease;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-header h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.login-header p {
+    color: #777;
+    font-size: 14px;
+}
+
+/* Form Elements */
+.login-form {
+    margin-top: 20px;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    cursor: pointer;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #667eea;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.remember-me input {
+    margin-right: 8px;
+}
+
+.remember-me label {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Buttons */
+.login-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-btn:hover {
+    background: linear-gradient(to right, #764ba2, #667eea);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-text {
+    transition: all 0.2s;
+}
+
+.btn-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+/* Loading state */
+.login-btn.loading .btn-text {
+    opacity: 0;
+}
+
+.login-btn.loading .btn-loader {
+    display: inline-block;
+}
+
+/* Error message */
+.error-message {
+    background-color: #ffebee;
+    color: #d32f2f;
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    display: none;
+}
+
+.error-message.active {
+    display: block;
+}
+
+/* Welcome screen */
+.welcome-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: all 0.5s ease;
+}
+
+.welcome-content {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+}
+
+.welcome-content h1 {
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.welcome-content p {
+    color: #666;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.logout-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.logout-btn:hover {
+    background: linear-gradient(to right, #764ba2, #667eea);
+    transform: translateY(-2px);
+}
+
+.hidden {
+    display: none;
+}
